@@ -55,9 +55,10 @@ namespace ECSAHelper
         {
             this.Executives = new List<Executive>();
             this.ExecutiveNames = new List<ExecutiveName>();
-            //this.nameMap.Clear();
-            using (StreamReader r = new StreamReader("executives.json"))
+            StreamReader r = null;
+            try
             {
+                r = new StreamReader("executives.json");
                 string json = r.ReadToEnd();
                 JsonTextReader reader = new JsonTextReader(new StringReader(json));
                 while (reader.Read())
@@ -107,6 +108,7 @@ namespace ECSAHelper
                                     }
                                     break;
                                 default:
+                                    reader.Read();
                                     break;
                             }
                         }
@@ -114,15 +116,29 @@ namespace ECSAHelper
                     }
                 }
             }
+            catch(Exception e)
+            {
+
+            }
+            finally
+            {
+                if (r != null)
+                {
+                    r.Close();
+                }
+            }
         }
 
         private void buttonUpdatePicture_Click(object sender, EventArgs e)
         {
-            var exec = this.GetExecutive(this.comboBoxPosition.SelectedItem.ToString());
-            this.oldFile = this.GetImageFileName(exec.position) + ".jpg";
-            this.openFileDialog1.InitialDirectory = Application.StartupPath;
-            this.openFileDialog1.FileName = this.oldFile;
-            this.openFileDialog1.ShowDialog();
+            if (this.comboBoxPosition.Items.Count > 0)
+            {
+                var exec = this.GetExecutive(this.comboBoxPosition.SelectedItem.ToString());
+                this.oldFile = this.GetImageFileName(exec.position) + ".jpg";
+                this.openFileDialog1.InitialDirectory = Application.StartupPath;
+                this.openFileDialog1.FileName = this.oldFile;
+                this.openFileDialog1.ShowDialog();
+            }
         }
 
         private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
@@ -149,7 +165,6 @@ namespace ECSAHelper
             {
                 this.ExecutiveNames.Add(new ExecutiveName(exec.position));
             }
-            this.Save();
         }
 
         private void buttonListPositions_Click(object sender, EventArgs e)
@@ -186,7 +201,11 @@ namespace ECSAHelper
             {
                 this.comboBoxPosition.Items.Add(exec.position);
             }
-            this.comboBoxPosition.SelectedIndex = 0;
+
+            if (this.comboBoxPosition.Items.Count > 0)
+            {
+                this.comboBoxPosition.SelectedIndex = 0;
+            }
 
             foreach (var exec in this.Executives)
             {
@@ -225,7 +244,7 @@ namespace ECSAHelper
 
         private void Save()
         {
-            if (this.tabControl1.SelectedIndex == 1)
+            if (this.tabControl1.SelectedIndex == 1 && this.comboBoxPosition.Items.Count > 0)
             {
                 var currentExec = this.GetExecutive(this.comboBoxPosition.SelectedItem.ToString());
                 currentExec.fullName = this.textBoxFullName.Text;
@@ -249,6 +268,11 @@ namespace ECSAHelper
         private void buttonHelp_Click(object sender, EventArgs e)
         {
             this.tabControl1.SelectedIndex = 2;
+        }
+
+        private void buttonSave2_Click(object sender, EventArgs e)
+        {
+            this.Save();
         }
     }
 }

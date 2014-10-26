@@ -32,6 +32,7 @@
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.tabControl1 = new ECSAHelper.TablessTab();
             this.ListPositionsTab = new System.Windows.Forms.TabPage();
+            this.buttonSave2 = new System.Windows.Forms.Button();
             this.buttonHelp = new System.Windows.Forms.Button();
             this.buttonEditAll = new System.Windows.Forms.Button();
             this.buttonNext = new System.Windows.Forms.Button();
@@ -78,6 +79,7 @@
             // 
             // ListPositionsTab
             // 
+            this.ListPositionsTab.Controls.Add(this.buttonSave2);
             this.ListPositionsTab.Controls.Add(this.buttonHelp);
             this.ListPositionsTab.Controls.Add(this.buttonEditAll);
             this.ListPositionsTab.Controls.Add(this.buttonNext);
@@ -89,6 +91,16 @@
             this.ListPositionsTab.TabIndex = 2;
             this.ListPositionsTab.Text = "List Positions";
             this.ListPositionsTab.UseVisualStyleBackColor = true;
+            // 
+            // buttonSave2
+            // 
+            this.buttonSave2.Location = new System.Drawing.Point(353, 26);
+            this.buttonSave2.Name = "buttonSave2";
+            this.buttonSave2.Size = new System.Drawing.Size(75, 23);
+            this.buttonSave2.TabIndex = 6;
+            this.buttonSave2.Text = "Save";
+            this.buttonSave2.UseVisualStyleBackColor = true;
+            this.buttonSave2.Click += new System.EventHandler(this.buttonSave2_Click);
             // 
             // buttonHelp
             // 
@@ -163,16 +175,16 @@
             // 
             // textBoxDebug
             // 
-            this.textBoxDebug.Location = new System.Drawing.Point(283, 35);
+            this.textBoxDebug.Location = new System.Drawing.Point(382, 35);
             this.textBoxDebug.Multiline = true;
             this.textBoxDebug.Name = "textBoxDebug";
             this.textBoxDebug.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBoxDebug.Size = new System.Drawing.Size(595, 255);
+            this.textBoxDebug.Size = new System.Drawing.Size(496, 255);
             this.textBoxDebug.TabIndex = 17;
             // 
             // buttonSaveUpdate
             // 
-            this.buttonSaveUpdate.Location = new System.Drawing.Point(193, 176);
+            this.buttonSaveUpdate.Location = new System.Drawing.Point(193, 258);
             this.buttonSaveUpdate.Name = "buttonSaveUpdate";
             this.buttonSaveUpdate.Size = new System.Drawing.Size(75, 23);
             this.buttonSaveUpdate.TabIndex = 16;
@@ -182,7 +194,7 @@
             // 
             // buttonBack
             // 
-            this.buttonBack.Location = new System.Drawing.Point(87, 176);
+            this.buttonBack.Location = new System.Drawing.Point(87, 258);
             this.buttonBack.Name = "buttonBack";
             this.buttonBack.Size = new System.Drawing.Size(75, 23);
             this.buttonBack.TabIndex = 15;
@@ -193,22 +205,24 @@
             // textBoxBio
             // 
             this.textBoxBio.Location = new System.Drawing.Point(87, 122);
+            this.textBoxBio.Multiline = true;
             this.textBoxBio.Name = "textBoxBio";
-            this.textBoxBio.Size = new System.Drawing.Size(181, 20);
+            this.textBoxBio.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.textBoxBio.Size = new System.Drawing.Size(289, 130);
             this.textBoxBio.TabIndex = 9;
             // 
             // textBoxEmail
             // 
             this.textBoxEmail.Location = new System.Drawing.Point(87, 82);
             this.textBoxEmail.Name = "textBoxEmail";
-            this.textBoxEmail.Size = new System.Drawing.Size(181, 20);
+            this.textBoxEmail.Size = new System.Drawing.Size(289, 20);
             this.textBoxEmail.TabIndex = 8;
             // 
             // textBoxFullName
             // 
             this.textBoxFullName.Location = new System.Drawing.Point(87, 42);
             this.textBoxFullName.Name = "textBoxFullName";
-            this.textBoxFullName.Size = new System.Drawing.Size(181, 20);
+            this.textBoxFullName.Size = new System.Drawing.Size(289, 20);
             this.textBoxFullName.TabIndex = 7;
             // 
             // labelBio
@@ -258,13 +272,13 @@
             "President"});
             this.comboBoxPosition.Location = new System.Drawing.Point(87, 6);
             this.comboBoxPosition.Name = "comboBoxPosition";
-            this.comboBoxPosition.Size = new System.Drawing.Size(181, 21);
+            this.comboBoxPosition.Size = new System.Drawing.Size(289, 21);
             this.comboBoxPosition.TabIndex = 1;
             this.comboBoxPosition.SelectedIndexChanged += new System.EventHandler(this.comboBoxPosition_SelectedIndexChanged);
             // 
             // buttonUpdatePicture
             // 
-            this.buttonUpdatePicture.Location = new System.Drawing.Point(283, 6);
+            this.buttonUpdatePicture.Location = new System.Drawing.Point(382, 6);
             this.buttonUpdatePicture.Name = "buttonUpdatePicture";
             this.buttonUpdatePicture.Size = new System.Drawing.Size(102, 23);
             this.buttonUpdatePicture.TabIndex = 0;
@@ -353,6 +367,7 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button buttonHelp;
         private System.Windows.Forms.Button buttonBack2;
+        private System.Windows.Forms.Button buttonSave2;
     }
 }
 
