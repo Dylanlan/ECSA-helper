@@ -28,15 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.tabControl1 = new ECSAHelper.TablessTab();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.button1 = new System.Windows.Forms.Button();
+            this.labelPosition = new System.Windows.Forms.Label();
+            this.comboBoxPosition = new System.Windows.Forms.ComboBox();
+            this.buttonPicture = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            this.openFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog1_FileOk);
             // 
             // tabControl1
             // 
@@ -51,8 +57,9 @@
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.comboBox1);
-            this.tabPage1.Controls.Add(this.button1);
+            this.tabPage1.Controls.Add(this.labelPosition);
+            this.tabPage1.Controls.Add(this.comboBoxPosition);
+            this.tabPage1.Controls.Add(this.buttonPicture);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
@@ -61,15 +68,38 @@
             this.tabPage1.Text = "Pictures";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // button1
+            // labelPosition
             // 
-            this.button1.Location = new System.Drawing.Point(148, 61);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(141, 23);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "President Picture";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.labelPosition.AutoSize = true;
+            this.labelPosition.Location = new System.Drawing.Point(95, 29);
+            this.labelPosition.Name = "labelPosition";
+            this.labelPosition.Size = new System.Drawing.Size(47, 13);
+            this.labelPosition.TabIndex = 2;
+            this.labelPosition.Text = "Position:";
+            // 
+            // comboBoxPosition
+            // 
+            this.comboBoxPosition.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxPosition.FormattingEnabled = true;
+            this.comboBoxPosition.Items.AddRange(new object[] {
+            "Vice President Communication",
+            "Vice President Finance",
+            "Vice President House",
+            "President"});
+            this.comboBoxPosition.Location = new System.Drawing.Point(148, 26);
+            this.comboBoxPosition.Name = "comboBoxPosition";
+            this.comboBoxPosition.Size = new System.Drawing.Size(173, 21);
+            this.comboBoxPosition.TabIndex = 1;
+            // 
+            // buttonPicture
+            // 
+            this.buttonPicture.Location = new System.Drawing.Point(327, 24);
+            this.buttonPicture.Name = "buttonPicture";
+            this.buttonPicture.Size = new System.Drawing.Size(90, 23);
+            this.buttonPicture.TabIndex = 0;
+            this.buttonPicture.Text = "New Picture...";
+            this.buttonPicture.UseVisualStyleBackColor = true;
+            this.buttonPicture.Click += new System.EventHandler(this.button1_Click);
             // 
             // tabPage2
             // 
@@ -81,24 +111,6 @@
             this.tabPage2.Text = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // openFileDialog1
-            // 
-            this.openFileDialog1.FileName = "openFileDialog1";
-            this.openFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog1_FileOk);
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "VPComm",
-            "VPFinance",
-            "VPHouse",
-            "President"});
-            this.comboBox1.Location = new System.Drawing.Point(148, 26);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 21);
-            this.comboBox1.TabIndex = 1;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -109,6 +121,7 @@
             this.Text = "Form1";
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -119,8 +132,9 @@
         private System.Windows.Forms.TabPage tabPage2;
         private TablessTab tabControl1;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Button buttonPicture;
+        private System.Windows.Forms.ComboBox comboBoxPosition;
+        private System.Windows.Forms.Label labelPosition;
     }
 }
 
