@@ -20,6 +20,7 @@ namespace ECSAHelper
     {
         private string oldFile = "oldfile";
         private string newFile = "newfile";
+        private string jsonFile = "executives.json";
 
         public Form1()
         {
@@ -58,7 +59,7 @@ namespace ECSAHelper
             StreamReader r = null;
             try
             {
-                r = new StreamReader("executives.json");
+                r = new StreamReader(this.jsonFile);
                 string json = r.ReadToEnd();
                 JsonTextReader reader = new JsonTextReader(new StringReader(json));
                 while (reader.Read())
@@ -115,10 +116,11 @@ namespace ECSAHelper
                         this.Executives.Add(exec);
                     }
                 }
+                this.textBoxStatus.Text = "Loaded file: " + this.jsonFile;
             }
             catch(Exception e)
             {
-
+                this.textBoxStatus.Text = "Could not find file: " + this.jsonFile;
             }
             finally
             {
@@ -153,12 +155,21 @@ namespace ECSAHelper
             string sourceFile = Path.GetFileName(this.newFile);
             string targetDir = Application.StartupPath;
             string targetFile = this.oldFile;
-            MessageBox.Show("sourceDir: " + sourceDir + ", sourceFile: " + sourceFile + ", targetDir: " + targetDir + ", targetFile: " + targetFile);
-            File.Copy(Path.Combine(sourceDir, sourceFile), Path.Combine(targetDir, targetFile), true);
+            
+            if (!string.Concat(sourceDir, sourceFile).Equals(string.Concat(targetDir, targetFile)))
+            {
+                File.Copy(Path.Combine(sourceDir, sourceFile), Path.Combine(targetDir, targetFile), true);
+                this.textBoxStatus.Text = "Saved file: " + sourceFile + " as: " + targetDir + "\\" + targetFile;
+            }
+            else
+            {
+                this.textBoxStatus.Text = "Trying to update file with itself";
+            }
         }
 
         private void buttonEditAll_Click(object sender, EventArgs e)
         {
+            this.textBoxStatus.Text = "";
             Editor.Edit(this, "Executives");
             this.ExecutiveNames.Clear();
             foreach(var exec in this.Executives)
@@ -169,6 +180,7 @@ namespace ECSAHelper
 
         private void buttonListPositions_Click(object sender, EventArgs e)
         {
+            this.textBoxStatus.Text = "";
             Editor.Edit(this, "ExecutiveNames");
 
             for (int i = 0; i < this.Executives.Count; i++)
@@ -194,6 +206,7 @@ namespace ECSAHelper
 
         private void buttonNext_Click(object sender, EventArgs e)
         {
+            this.textBoxStatus.Text = "";
             this.tabControl1.SelectedIndex = 1;
 
             this.comboBoxPosition.Items.Clear();
@@ -233,6 +246,7 @@ namespace ECSAHelper
 
         private void buttonBack_Click(object sender, EventArgs e)
         {
+            this.textBoxStatus.Text = "";
             this.tabControl1.SelectedIndex = 0;
         }
 
@@ -262,6 +276,7 @@ namespace ECSAHelper
             using (StreamWriter outfile = new StreamWriter("executives.json"))
             {
                 outfile.Write(output.ToString());
+                this.textBoxStatus.Text = "Saved to file: " + this.jsonFile;
             }
         }
 

@@ -54,6 +54,7 @@
             this.HelpTab = new System.Windows.Forms.TabPage();
             this.buttonBack2 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBoxStatus = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.ListPositionsTab.SuspendLayout();
             this.UpdateTab.SuspendLayout();
@@ -71,11 +72,11 @@
             this.tabControl1.Controls.Add(this.ListPositionsTab);
             this.tabControl1.Controls.Add(this.UpdateTab);
             this.tabControl1.Controls.Add(this.HelpTab);
-            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Top;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(892, 324);
+            this.tabControl1.Size = new System.Drawing.Size(892, 298);
             this.tabControl1.TabIndex = 0;
             // 
             // ListPositionsTab
@@ -88,7 +89,7 @@
             this.ListPositionsTab.Controls.Add(this.buttonListPositions);
             this.ListPositionsTab.Location = new System.Drawing.Point(4, 22);
             this.ListPositionsTab.Name = "ListPositionsTab";
-            this.ListPositionsTab.Size = new System.Drawing.Size(884, 298);
+            this.ListPositionsTab.Size = new System.Drawing.Size(884, 272);
             this.ListPositionsTab.TabIndex = 2;
             this.ListPositionsTab.Text = "List Positions";
             this.ListPositionsTab.UseVisualStyleBackColor = true;
@@ -322,11 +323,20 @@
             this.textBox1.TabIndex = 1;
             this.textBox1.Text = resources.GetString("textBox1.Text");
             // 
+            // textBoxStatus
+            // 
+            this.textBoxStatus.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.textBoxStatus.Location = new System.Drawing.Point(0, 304);
+            this.textBoxStatus.Name = "textBoxStatus";
+            this.textBoxStatus.Size = new System.Drawing.Size(892, 20);
+            this.textBoxStatus.TabIndex = 1;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(892, 324);
+            this.Controls.Add(this.textBoxStatus);
             this.Controls.Add(this.tabControl1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
@@ -339,6 +349,7 @@
             this.HelpTab.ResumeLayout(false);
             this.HelpTab.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -369,6 +380,7 @@
         private System.Windows.Forms.Button buttonHelp;
         private System.Windows.Forms.Button buttonBack2;
         private System.Windows.Forms.Button buttonSave2;
+        private System.Windows.Forms.TextBox textBoxStatus;
     }
 }
 
