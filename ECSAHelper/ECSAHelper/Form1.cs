@@ -21,6 +21,7 @@ namespace ECSAHelper
         private string oldFile = "oldfile";
         private string newFile = "newfile";
         private string jsonFile = "executives.json";
+        private string tempString = "";
 
         public Form1()
         {
@@ -31,6 +32,7 @@ namespace ECSAHelper
             {
                 this.comboBoxPosition.SelectedIndex = 0;
             }
+            this.textBoxStatus.Text = this.tempString;
             this.Text = "ECSA Website Contact Updater";
         }
 
@@ -66,6 +68,7 @@ namespace ECSAHelper
             {
                 r = new StreamReader(this.jsonFile);
                 string json = r.ReadToEnd();
+                this.textBoxDebug.Text = json;
                 JsonTextReader reader = new JsonTextReader(new StringReader(json));
                 while (reader.Read())
                 {
@@ -81,9 +84,6 @@ namespace ECSAHelper
                                     {
                                         exec.position = reader.Value.ToString();
                                         this.ExecutiveNames.Add(new ExecutiveName(exec.position));
-                                        //string position = exec.position;
-                                        //var nameNoSpaces = position.Replace(" ", string.Empty);
-                                        //nameMap.Add(position, nameNoSpaces);
                                     }
                                     break;
 
@@ -121,11 +121,11 @@ namespace ECSAHelper
                         this.Executives.Add(exec);
                     }
                 }
-                this.textBoxStatus.Text = "Loaded file: " + this.jsonFile;
+                this.tempString = "Loaded file: " + this.jsonFile;
             }
             catch(Exception e)
             {
-                this.textBoxStatus.Text = "Could not find file: " + this.jsonFile;
+                this.tempString = "Could not find file: " + this.jsonFile;
             }
             finally
             {
@@ -159,17 +159,18 @@ namespace ECSAHelper
         {
             string sourceDir = Path.GetDirectoryName(this.newFile);
             string sourceFile = Path.GetFileName(this.newFile);
-            string targetDir = Path.GetDirectoryName(this.oldFile);
+            string relativeTargetDir = Path.GetDirectoryName(this.oldFile);
+            string targetDir = Path.GetFullPath(relativeTargetDir);
             string targetFile = Path.GetFileName(this.oldFile);
             
             if (!string.Concat(sourceDir, sourceFile).Equals(string.Concat(targetDir, targetFile)))
             {
                 File.Copy(Path.Combine(sourceDir, sourceFile), Path.Combine(targetDir, targetFile), true);
-                this.textBoxStatus.Text = "Saved file: " + sourceFile + " as: " + targetDir + "\\" + targetFile;
+                this.textBoxStatus.Text = "Saved file: " + sourceFile + " to: " + targetDir + "\\" + targetFile;
             }
             else
             {
-                this.textBoxStatus.Text = "Trying to update file with itself";
+                this.textBoxStatus.Text = "Tried to update picture with itself";
             }
         }
 
@@ -341,6 +342,7 @@ namespace ECSAHelper
 
         private void buttonAbout_Click(object sender, EventArgs e)
         {
+            this.textBoxStatus.Text = "";
             this.tabControl1.SelectedIndex = 1;
         }
 

@@ -33,6 +33,7 @@
             this.textBoxStatus = new System.Windows.Forms.TextBox();
             this.tabControl1 = new ECSAHelper.TablessTab();
             this.UpdateTab = new System.Windows.Forms.TabPage();
+            this.labelOutput = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.labelPicture = new System.Windows.Forms.Label();
             this.buttonAbout = new System.Windows.Forms.Button();
@@ -84,6 +85,7 @@
             // 
             // UpdateTab
             // 
+            this.UpdateTab.Controls.Add(this.labelOutput);
             this.UpdateTab.Controls.Add(this.pictureBox1);
             this.UpdateTab.Controls.Add(this.labelPicture);
             this.UpdateTab.Controls.Add(this.buttonAbout);
@@ -106,6 +108,15 @@
             this.UpdateTab.TabIndex = 0;
             this.UpdateTab.Text = "Update";
             this.UpdateTab.UseVisualStyleBackColor = true;
+            // 
+            // labelOutput
+            // 
+            this.labelOutput.AutoSize = true;
+            this.labelOutput.Location = new System.Drawing.Point(379, 79);
+            this.labelOutput.Name = "labelOutput";
+            this.labelOutput.Size = new System.Drawing.Size(83, 13);
+            this.labelOutput.TabIndex = 22;
+            this.labelOutput.Text = "executives.json:";
             // 
             // pictureBox1
             // 
@@ -150,6 +161,7 @@
             this.textBoxDebug.Location = new System.Drawing.Point(382, 95);
             this.textBoxDebug.Multiline = true;
             this.textBoxDebug.Name = "textBoxDebug";
+            this.textBoxDebug.ReadOnly = true;
             this.textBoxDebug.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.textBoxDebug.Size = new System.Drawing.Size(496, 255);
             this.textBoxDebug.TabIndex = 17;
@@ -329,6 +341,7 @@
         private System.Windows.Forms.Button buttonAbout;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label labelPicture;
+        private System.Windows.Forms.Label labelOutput;
     }
 }
 
