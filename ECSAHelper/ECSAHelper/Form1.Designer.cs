@@ -31,17 +31,11 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.tabControl1 = new ECSAHelper.TablessTab();
-            this.ListPositionsTab = new System.Windows.Forms.TabPage();
-            this.buttonSave2 = new System.Windows.Forms.Button();
-            this.buttonHelp = new System.Windows.Forms.Button();
-            this.buttonEditAll = new System.Windows.Forms.Button();
-            this.buttonNext = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.buttonListPositions = new System.Windows.Forms.Button();
             this.UpdateTab = new System.Windows.Forms.TabPage();
+            this.buttonAbout = new System.Windows.Forms.Button();
+            this.buttonPositions = new System.Windows.Forms.Button();
             this.textBoxDebug = new System.Windows.Forms.TextBox();
             this.buttonSaveUpdate = new System.Windows.Forms.Button();
-            this.buttonBack = new System.Windows.Forms.Button();
             this.textBoxBio = new System.Windows.Forms.TextBox();
             this.textBoxEmail = new System.Windows.Forms.TextBox();
             this.textBoxFullName = new System.Windows.Forms.TextBox();
@@ -51,14 +45,13 @@
             this.labelPosition = new System.Windows.Forms.Label();
             this.comboBoxPosition = new System.Windows.Forms.ComboBox();
             this.buttonUpdatePicture = new System.Windows.Forms.Button();
-            this.HelpTab = new System.Windows.Forms.TabPage();
+            this.AboutTab = new System.Windows.Forms.TabPage();
             this.buttonBack2 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBoxStatus = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
-            this.ListPositionsTab.SuspendLayout();
             this.UpdateTab.SuspendLayout();
-            this.HelpTab.SuspendLayout();
+            this.AboutTab.SuspendLayout();
             this.SuspendLayout();
             // 
             // openFileDialog1
@@ -69,9 +62,8 @@
             // 
             // tabControl1
             // 
-            this.tabControl1.Controls.Add(this.ListPositionsTab);
             this.tabControl1.Controls.Add(this.UpdateTab);
-            this.tabControl1.Controls.Add(this.HelpTab);
+            this.tabControl1.Controls.Add(this.AboutTab);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Top;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
@@ -79,85 +71,12 @@
             this.tabControl1.Size = new System.Drawing.Size(892, 298);
             this.tabControl1.TabIndex = 0;
             // 
-            // ListPositionsTab
-            // 
-            this.ListPositionsTab.Controls.Add(this.buttonSave2);
-            this.ListPositionsTab.Controls.Add(this.buttonHelp);
-            this.ListPositionsTab.Controls.Add(this.buttonEditAll);
-            this.ListPositionsTab.Controls.Add(this.buttonNext);
-            this.ListPositionsTab.Controls.Add(this.label1);
-            this.ListPositionsTab.Controls.Add(this.buttonListPositions);
-            this.ListPositionsTab.Location = new System.Drawing.Point(4, 22);
-            this.ListPositionsTab.Name = "ListPositionsTab";
-            this.ListPositionsTab.Size = new System.Drawing.Size(884, 272);
-            this.ListPositionsTab.TabIndex = 2;
-            this.ListPositionsTab.Text = "List Positions";
-            this.ListPositionsTab.UseVisualStyleBackColor = true;
-            // 
-            // buttonSave2
-            // 
-            this.buttonSave2.Location = new System.Drawing.Point(353, 26);
-            this.buttonSave2.Name = "buttonSave2";
-            this.buttonSave2.Size = new System.Drawing.Size(75, 23);
-            this.buttonSave2.TabIndex = 6;
-            this.buttonSave2.Text = "Save";
-            this.buttonSave2.UseVisualStyleBackColor = true;
-            this.buttonSave2.Click += new System.EventHandler(this.buttonSave2_Click);
-            // 
-            // buttonHelp
-            // 
-            this.buttonHelp.Location = new System.Drawing.Point(233, 125);
-            this.buttonHelp.Name = "buttonHelp";
-            this.buttonHelp.Size = new System.Drawing.Size(75, 23);
-            this.buttonHelp.TabIndex = 5;
-            this.buttonHelp.Text = "Help";
-            this.buttonHelp.UseVisualStyleBackColor = true;
-            this.buttonHelp.Click += new System.EventHandler(this.buttonHelp_Click);
-            // 
-            // buttonEditAll
-            // 
-            this.buttonEditAll.Location = new System.Drawing.Point(233, 26);
-            this.buttonEditAll.Name = "buttonEditAll";
-            this.buttonEditAll.Size = new System.Drawing.Size(75, 23);
-            this.buttonEditAll.TabIndex = 4;
-            this.buttonEditAll.Text = "Edit All...";
-            this.buttonEditAll.UseVisualStyleBackColor = true;
-            this.buttonEditAll.Click += new System.EventHandler(this.buttonEditAll_Click);
-            // 
-            // buttonNext
-            // 
-            this.buttonNext.Location = new System.Drawing.Point(353, 71);
-            this.buttonNext.Name = "buttonNext";
-            this.buttonNext.Size = new System.Drawing.Size(75, 23);
-            this.buttonNext.TabIndex = 2;
-            this.buttonNext.Text = "Next";
-            this.buttonNext.UseVisualStyleBackColor = true;
-            this.buttonNext.Click += new System.EventHandler(this.buttonNext_Click);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(58, 76);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(169, 13);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Please list the Executive positions:";
-            // 
-            // buttonListPositions
-            // 
-            this.buttonListPositions.Location = new System.Drawing.Point(233, 71);
-            this.buttonListPositions.Name = "buttonListPositions";
-            this.buttonListPositions.Size = new System.Drawing.Size(75, 23);
-            this.buttonListPositions.TabIndex = 0;
-            this.buttonListPositions.Text = "Positions...";
-            this.buttonListPositions.UseVisualStyleBackColor = true;
-            this.buttonListPositions.Click += new System.EventHandler(this.buttonListPositions_Click);
-            // 
             // UpdateTab
             // 
+            this.UpdateTab.Controls.Add(this.buttonAbout);
+            this.UpdateTab.Controls.Add(this.buttonPositions);
             this.UpdateTab.Controls.Add(this.textBoxDebug);
             this.UpdateTab.Controls.Add(this.buttonSaveUpdate);
-            this.UpdateTab.Controls.Add(this.buttonBack);
             this.UpdateTab.Controls.Add(this.textBoxBio);
             this.UpdateTab.Controls.Add(this.textBoxEmail);
             this.UpdateTab.Controls.Add(this.textBoxFullName);
@@ -170,10 +89,30 @@
             this.UpdateTab.Location = new System.Drawing.Point(4, 22);
             this.UpdateTab.Name = "UpdateTab";
             this.UpdateTab.Padding = new System.Windows.Forms.Padding(3);
-            this.UpdateTab.Size = new System.Drawing.Size(884, 298);
+            this.UpdateTab.Size = new System.Drawing.Size(884, 272);
             this.UpdateTab.TabIndex = 0;
             this.UpdateTab.Text = "Update";
             this.UpdateTab.UseVisualStyleBackColor = true;
+            // 
+            // buttonAbout
+            // 
+            this.buttonAbout.Location = new System.Drawing.Point(168, 258);
+            this.buttonAbout.Name = "buttonAbout";
+            this.buttonAbout.Size = new System.Drawing.Size(75, 23);
+            this.buttonAbout.TabIndex = 19;
+            this.buttonAbout.Text = "About";
+            this.buttonAbout.UseVisualStyleBackColor = true;
+            this.buttonAbout.Click += new System.EventHandler(this.buttonAbout_Click);
+            // 
+            // buttonPositions
+            // 
+            this.buttonPositions.Location = new System.Drawing.Point(382, 6);
+            this.buttonPositions.Name = "buttonPositions";
+            this.buttonPositions.Size = new System.Drawing.Size(99, 23);
+            this.buttonPositions.TabIndex = 18;
+            this.buttonPositions.Text = "Positions...";
+            this.buttonPositions.UseVisualStyleBackColor = true;
+            this.buttonPositions.Click += new System.EventHandler(this.buttonPositions_Click);
             // 
             // textBoxDebug
             // 
@@ -186,23 +125,13 @@
             // 
             // buttonSaveUpdate
             // 
-            this.buttonSaveUpdate.Location = new System.Drawing.Point(193, 258);
+            this.buttonSaveUpdate.Location = new System.Drawing.Point(87, 258);
             this.buttonSaveUpdate.Name = "buttonSaveUpdate";
             this.buttonSaveUpdate.Size = new System.Drawing.Size(75, 23);
             this.buttonSaveUpdate.TabIndex = 16;
             this.buttonSaveUpdate.Text = "Save";
             this.buttonSaveUpdate.UseVisualStyleBackColor = true;
             this.buttonSaveUpdate.Click += new System.EventHandler(this.buttonSaveUpdate_Click);
-            // 
-            // buttonBack
-            // 
-            this.buttonBack.Location = new System.Drawing.Point(87, 258);
-            this.buttonBack.Name = "buttonBack";
-            this.buttonBack.Size = new System.Drawing.Size(75, 23);
-            this.buttonBack.TabIndex = 15;
-            this.buttonBack.Text = "Back";
-            this.buttonBack.UseVisualStyleBackColor = true;
-            this.buttonBack.Click += new System.EventHandler(this.buttonBack_Click);
             // 
             // textBoxBio
             // 
@@ -277,10 +206,11 @@
             this.comboBoxPosition.Size = new System.Drawing.Size(289, 21);
             this.comboBoxPosition.TabIndex = 1;
             this.comboBoxPosition.SelectedIndexChanged += new System.EventHandler(this.comboBoxPosition_SelectedIndexChanged);
+            this.comboBoxPosition.GotFocus += new System.EventHandler(this.comboBoxPosition_GotFocus);
             // 
             // buttonUpdatePicture
             // 
-            this.buttonUpdatePicture.Location = new System.Drawing.Point(382, 6);
+            this.buttonUpdatePicture.Location = new System.Drawing.Point(487, 7);
             this.buttonUpdatePicture.Name = "buttonUpdatePicture";
             this.buttonUpdatePicture.Size = new System.Drawing.Size(102, 23);
             this.buttonUpdatePicture.TabIndex = 0;
@@ -288,21 +218,21 @@
             this.buttonUpdatePicture.UseVisualStyleBackColor = true;
             this.buttonUpdatePicture.Click += new System.EventHandler(this.buttonUpdatePicture_Click);
             // 
-            // HelpTab
+            // AboutTab
             // 
-            this.HelpTab.Controls.Add(this.buttonBack2);
-            this.HelpTab.Controls.Add(this.textBox1);
-            this.HelpTab.Location = new System.Drawing.Point(4, 22);
-            this.HelpTab.Name = "HelpTab";
-            this.HelpTab.Size = new System.Drawing.Size(884, 298);
-            this.HelpTab.TabIndex = 3;
-            this.HelpTab.Text = "Help";
-            this.HelpTab.UseVisualStyleBackColor = true;
+            this.AboutTab.Controls.Add(this.buttonBack2);
+            this.AboutTab.Controls.Add(this.textBox1);
+            this.AboutTab.Location = new System.Drawing.Point(4, 22);
+            this.AboutTab.Name = "AboutTab";
+            this.AboutTab.Size = new System.Drawing.Size(884, 272);
+            this.AboutTab.TabIndex = 3;
+            this.AboutTab.Text = "About";
+            this.AboutTab.UseVisualStyleBackColor = true;
             // 
             // buttonBack2
             // 
             this.buttonBack2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.buttonBack2.Location = new System.Drawing.Point(349, 267);
+            this.buttonBack2.Location = new System.Drawing.Point(8, 216);
             this.buttonBack2.Name = "buttonBack2";
             this.buttonBack2.Size = new System.Drawing.Size(75, 23);
             this.buttonBack2.TabIndex = 0;
@@ -342,12 +272,10 @@
             this.Name = "Form1";
             this.Text = "Form1";
             this.tabControl1.ResumeLayout(false);
-            this.ListPositionsTab.ResumeLayout(false);
-            this.ListPositionsTab.PerformLayout();
             this.UpdateTab.ResumeLayout(false);
             this.UpdateTab.PerformLayout();
-            this.HelpTab.ResumeLayout(false);
-            this.HelpTab.PerformLayout();
+            this.AboutTab.ResumeLayout(false);
+            this.AboutTab.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -367,20 +295,14 @@
         private System.Windows.Forms.Label labelBio;
         private System.Windows.Forms.Label labelEmail;
         private System.Windows.Forms.Label labelName;
-        private System.Windows.Forms.TabPage ListPositionsTab;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button buttonListPositions;
-        private System.Windows.Forms.Button buttonNext;
-        private System.Windows.Forms.Button buttonBack;
-        private System.Windows.Forms.Button buttonEditAll;
         private System.Windows.Forms.Button buttonSaveUpdate;
         private System.Windows.Forms.TextBox textBoxDebug;
-        private System.Windows.Forms.TabPage HelpTab;
+        private System.Windows.Forms.TabPage AboutTab;
         private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Button buttonHelp;
         private System.Windows.Forms.Button buttonBack2;
-        private System.Windows.Forms.Button buttonSave2;
         private System.Windows.Forms.TextBox textBoxStatus;
+        private System.Windows.Forms.Button buttonPositions;
+        private System.Windows.Forms.Button buttonAbout;
     }
 }
 

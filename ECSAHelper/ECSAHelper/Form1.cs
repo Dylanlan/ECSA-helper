@@ -26,6 +26,11 @@ namespace ECSAHelper
         {
             InitializeComponent();
             this.LoadJson();
+            this.SyncPositions();
+            if (this.comboBoxPosition.Items.Count > 0)
+            {
+                this.comboBoxPosition.SelectedIndex = 0;
+            }
             this.Text = "ECSA Website Contact Updater";
         }
 
@@ -167,70 +172,6 @@ namespace ECSAHelper
             }
         }
 
-        private void buttonEditAll_Click(object sender, EventArgs e)
-        {
-            this.textBoxStatus.Text = "";
-            Editor.Edit(this, "Executives");
-            this.ExecutiveNames.Clear();
-            foreach(var exec in this.Executives)
-            {
-                this.ExecutiveNames.Add(new ExecutiveName(exec.position));
-            }
-        }
-
-        private void buttonListPositions_Click(object sender, EventArgs e)
-        {
-            this.textBoxStatus.Text = "";
-            Editor.Edit(this, "ExecutiveNames");
-
-            for (int i = 0; i < this.Executives.Count; i++)
-            {
-                var exec = this.Executives[i];
-                if (!this.ExecutiveNames.Exists(x => x.Name == exec.position))
-                {
-                    this.Executives.RemoveAt(i);
-                    i--;
-                }
-            }
-
-            foreach (var execName in this.ExecutiveNames)
-            {
-                string name = execName.Name;
-                if (!this.Executives.Exists(x => x.position == name))
-                {
-                    var newExec = new Executive(name);
-                    this.Executives.Add(newExec);
-                }
-            }
-        }
-
-        private void buttonNext_Click(object sender, EventArgs e)
-        {
-            this.textBoxStatus.Text = "";
-            this.tabControl1.SelectedIndex = 1;
-
-            this.comboBoxPosition.Items.Clear();
-            foreach (var exec in this.Executives)
-            {
-                this.comboBoxPosition.Items.Add(exec.position);
-            }
-
-            if (this.comboBoxPosition.Items.Count > 0)
-            {
-                this.comboBoxPosition.SelectedIndex = 0;
-            }
-
-            foreach (var exec in this.Executives)
-            {
-                if (exec.position == this.comboBoxPosition.SelectedItem.ToString())
-                {
-                        this.textBoxFullName.Text = exec.fullName;
-                        this.textBoxEmail.Text = exec.email;
-                        this.textBoxBio.Text = exec.bio;
-                }
-            }
-        }
-
         void comboBoxPosition_SelectedIndexChanged(object sender, EventArgs e)
         {
             foreach (var exec in this.Executives)
@@ -253,18 +194,11 @@ namespace ECSAHelper
         private void buttonSaveUpdate_Click(object sender, EventArgs e)
         {
             this.Save();
-            
         }
 
         private void Save()
         {
-            if (this.tabControl1.SelectedIndex == 1 && this.comboBoxPosition.Items.Count > 0)
-            {
-                var currentExec = this.GetExecutive(this.comboBoxPosition.SelectedItem.ToString());
-                currentExec.fullName = this.textBoxFullName.Text;
-                currentExec.email = this.textBoxEmail.Text;
-                currentExec.bio = this.textBoxBio.Text;
-            }
+            this.UpdateCurrentExec();
 
             foreach (var exec in this.Executives)
             {
@@ -280,14 +214,119 @@ namespace ECSAHelper
             }
         }
 
-        private void buttonHelp_Click(object sender, EventArgs e)
+        private void buttonPositions_Click(object sender, EventArgs e)
         {
-            this.tabControl1.SelectedIndex = 2;
+            this.UpdateCurrentExec();
+            this.textBoxStatus.Text = "";
+            int oldNum = this.comboBoxPosition.Items.Count;
+            string selectedExec = "";
+            if (oldNum > 0)
+            {
+                selectedExec = this.comboBoxPosition.SelectedItem.ToString();
+            }
+
+            Editor.Edit(this, "ExecutiveNames");
+
+            this.SyncPositions();
+            int newNum = this.comboBoxPosition.Items.Count;
+
+            if (oldNum == 0 && newNum > 0)
+            {
+                this.comboBoxPosition.SelectedIndex = 0;
+            }
+            else
+            {
+                this.SelectExec(selectedExec);
+            }
+
+            this.DisplaySelectedExecInfo();
         }
 
-        private void buttonSave2_Click(object sender, EventArgs e)
+        private void SelectExec(string position)
         {
-            this.Save();
+            if (this.comboBoxPosition.Items.Count > 0)
+            {
+                int index = this.comboBoxPosition.Items.IndexOf(position);
+                if (index > 0)
+                {
+                    this.comboBoxPosition.SelectedIndex = index;
+                }
+                else
+                {
+                    this.comboBoxPosition.SelectedIndex = 0;
+                }
+            }
+        }
+
+        private void SyncPositions()
+        {
+            for (int i = 0; i < this.Executives.Count; i++)
+            {
+                var exec = this.Executives[i];
+                if (!this.ExecutiveNames.Exists(x => x.Name == exec.position))
+                {
+                    this.Executives.RemoveAt(i);
+                    i--;
+                }
+            }
+
+            foreach (var execName in this.ExecutiveNames)
+            {
+                string name = execName.Name;
+                if (!this.Executives.Exists(x => x.position == name))
+                {
+                    var newExec = new Executive(name);
+                    this.Executives.Add(newExec);
+                }
+            }
+
+            this.comboBoxPosition.Items.Clear();
+            foreach (var exec in this.Executives)
+            {
+                this.comboBoxPosition.Items.Add(exec.position);
+            }
+        }
+
+        private void DisplaySelectedExecInfo()
+        {
+            if (this.comboBoxPosition.Items.Count > 0)
+            {
+                string position = this.comboBoxPosition.SelectedItem.ToString();
+                var exec = this.Executives.FirstOrDefault(x => x.position == position);
+                if (exec != null)
+                {
+                    this.textBoxFullName.Text = exec.fullName;
+                    this.textBoxEmail.Text = exec.email;
+                    this.textBoxBio.Text = exec.bio;
+                }
+            }
+            else
+            {
+                this.textBoxFullName.Text = "";
+                this.textBoxEmail.Text = "";
+                this.textBoxBio.Text = "";
+            }
+        }
+
+        private void buttonAbout_Click(object sender, EventArgs e)
+        {
+            this.tabControl1.SelectedIndex = 1;
+        }
+
+        private void comboBoxPosition_GotFocus(object sender, EventArgs e)
+        {
+            this.UpdateCurrentExec();
+        }
+
+        private void UpdateCurrentExec()
+        {
+            if (this.tabControl1.SelectedIndex == 0 && this.comboBoxPosition.Items.Count > 0)
+            {
+                var currentExec = this.GetExecutive(this.comboBoxPosition.SelectedItem.ToString());
+                currentExec.fullName = this.textBoxFullName.Text;
+                currentExec.email = this.textBoxEmail.Text;
+                currentExec.bio = this.textBoxBio.Text;
+            }
         }
     }
 }
