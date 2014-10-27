@@ -141,10 +141,11 @@ namespace ECSAHelper
             if (this.comboBoxPosition.Items.Count > 0)
             {
                 var exec = this.GetExecutive(this.comboBoxPosition.SelectedItem.ToString());
-                this.oldFile = this.GetImageFileName(exec.position) + ".jpg";
+                this.oldFile = exec.imageUrl;
                 this.openFileDialog1.InitialDirectory = Application.StartupPath;
                 this.openFileDialog1.FileName = this.oldFile;
                 this.openFileDialog1.ShowDialog();
+                this.SetPicture(exec);
             }
         }
 
@@ -158,8 +159,8 @@ namespace ECSAHelper
         {
             string sourceDir = Path.GetDirectoryName(this.newFile);
             string sourceFile = Path.GetFileName(this.newFile);
-            string targetDir = Application.StartupPath;
-            string targetFile = this.oldFile;
+            string targetDir = Path.GetDirectoryName(this.oldFile);
+            string targetFile = Path.GetFileName(this.oldFile);
             
             if (!string.Concat(sourceDir, sourceFile).Equals(string.Concat(targetDir, targetFile)))
             {
@@ -174,14 +175,11 @@ namespace ECSAHelper
 
         void comboBoxPosition_SelectedIndexChanged(object sender, EventArgs e)
         {
-            foreach (var exec in this.Executives)
+            this.textBoxStatus.Text = "";
+            if (comboBoxPosition.Items.Count > 0)
             {
-                if (exec.position.Equals(this.comboBoxPosition.SelectedItem.ToString()))
-                {
-                    this.textBoxFullName.Text = exec.fullName;
-                    this.textBoxEmail.Text = exec.email;
-                    this.textBoxBio.Text = exec.bio;
-                }
+                var currentExec = this.GetExecutive(this.comboBoxPosition.SelectedItem.ToString());
+                this.DisplayExecInfo(currentExec);
             }
         }
 
@@ -287,6 +285,24 @@ namespace ECSAHelper
             }
         }
 
+        private void DisplayExecInfo(Executive exec)
+        {
+            if (exec != null)
+            {
+                this.SetPicture(exec);
+                this.textBoxFullName.Text = exec.fullName;
+                this.textBoxEmail.Text = exec.email;
+                this.textBoxBio.Text = exec.bio;
+            }
+            else
+            {
+                this.pictureBox1.Image = null;
+                this.textBoxFullName.Text = "";
+                this.textBoxEmail.Text = "";
+                this.textBoxBio.Text = "";
+            }
+        }
+
         private void DisplaySelectedExecInfo()
         {
             if (this.comboBoxPosition.Items.Count > 0)
@@ -295,17 +311,32 @@ namespace ECSAHelper
                 var exec = this.Executives.FirstOrDefault(x => x.position == position);
                 if (exec != null)
                 {
-                    this.textBoxFullName.Text = exec.fullName;
-                    this.textBoxEmail.Text = exec.email;
-                    this.textBoxBio.Text = exec.bio;
+                    this.DisplayExecInfo(exec);
+                }
+                else
+                {
+                    this.DisplayExecInfo(null);
                 }
             }
             else
             {
-                this.textBoxFullName.Text = "";
-                this.textBoxEmail.Text = "";
-                this.textBoxBio.Text = "";
+                this.DisplayExecInfo(null);
             }
+        }
+
+        private void SetPicture(Executive exec)
+        {
+            string imageFile = exec.imageUrl;
+            if (File.Exists(imageFile))
+            {
+                this.pictureBox1.Image = Image.FromStream(new MemoryStream(File.ReadAllBytes(imageFile)));
+            }
+            else
+            {
+                this.textBoxStatus.Text = "Could not find picture: " + imageFile;
+                this.pictureBox1.Image = null;
+            }
+            
         }
 
         private void buttonAbout_Click(object sender, EventArgs e)
@@ -323,6 +354,7 @@ namespace ECSAHelper
             if (this.tabControl1.SelectedIndex == 0 && this.comboBoxPosition.Items.Count > 0)
             {
                 var currentExec = this.GetExecutive(this.comboBoxPosition.SelectedItem.ToString());
+                currentExec.imageUrl = "img/" + this.GetImageFileName(currentExec.position) + ".jpg";
                 currentExec.fullName = this.textBoxFullName.Text;
                 currentExec.email = this.textBoxEmail.Text;
                 currentExec.bio = this.textBoxBio.Text;

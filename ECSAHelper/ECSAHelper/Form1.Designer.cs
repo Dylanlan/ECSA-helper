@@ -30,8 +30,11 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.textBoxStatus = new System.Windows.Forms.TextBox();
             this.tabControl1 = new ECSAHelper.TablessTab();
             this.UpdateTab = new System.Windows.Forms.TabPage();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.labelPicture = new System.Windows.Forms.Label();
             this.buttonAbout = new System.Windows.Forms.Button();
             this.buttonPositions = new System.Windows.Forms.Button();
             this.textBoxDebug = new System.Windows.Forms.TextBox();
@@ -48,9 +51,9 @@
             this.AboutTab = new System.Windows.Forms.TabPage();
             this.buttonBack2 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBoxStatus = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.UpdateTab.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.AboutTab.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -60,6 +63,14 @@
             this.openFileDialog1.Title = "Choose New Picture";
             this.openFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog1_FileOk);
             // 
+            // textBoxStatus
+            // 
+            this.textBoxStatus.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.textBoxStatus.Location = new System.Drawing.Point(0, 388);
+            this.textBoxStatus.Name = "textBoxStatus";
+            this.textBoxStatus.Size = new System.Drawing.Size(892, 20);
+            this.textBoxStatus.TabIndex = 1;
+            // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.UpdateTab);
@@ -68,11 +79,13 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(892, 298);
+            this.tabControl1.Size = new System.Drawing.Size(892, 382);
             this.tabControl1.TabIndex = 0;
             // 
             // UpdateTab
             // 
+            this.UpdateTab.Controls.Add(this.pictureBox1);
+            this.UpdateTab.Controls.Add(this.labelPicture);
             this.UpdateTab.Controls.Add(this.buttonAbout);
             this.UpdateTab.Controls.Add(this.buttonPositions);
             this.UpdateTab.Controls.Add(this.textBoxDebug);
@@ -89,14 +102,32 @@
             this.UpdateTab.Location = new System.Drawing.Point(4, 22);
             this.UpdateTab.Name = "UpdateTab";
             this.UpdateTab.Padding = new System.Windows.Forms.Padding(3);
-            this.UpdateTab.Size = new System.Drawing.Size(884, 272);
+            this.UpdateTab.Size = new System.Drawing.Size(884, 356);
             this.UpdateTab.TabIndex = 0;
             this.UpdateTab.Text = "Update";
             this.UpdateTab.UseVisualStyleBackColor = true;
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Location = new System.Drawing.Point(87, 37);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(100, 84);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 21;
+            this.pictureBox1.TabStop = false;
+            // 
+            // labelPicture
+            // 
+            this.labelPicture.AutoSize = true;
+            this.labelPicture.Location = new System.Drawing.Point(8, 37);
+            this.labelPicture.Name = "labelPicture";
+            this.labelPicture.Size = new System.Drawing.Size(43, 13);
+            this.labelPicture.TabIndex = 20;
+            this.labelPicture.Text = "Picture:";
+            // 
             // buttonAbout
             // 
-            this.buttonAbout.Location = new System.Drawing.Point(168, 258);
+            this.buttonAbout.Location = new System.Drawing.Point(168, 327);
             this.buttonAbout.Name = "buttonAbout";
             this.buttonAbout.Size = new System.Drawing.Size(75, 23);
             this.buttonAbout.TabIndex = 19;
@@ -116,7 +147,7 @@
             // 
             // textBoxDebug
             // 
-            this.textBoxDebug.Location = new System.Drawing.Point(382, 35);
+            this.textBoxDebug.Location = new System.Drawing.Point(382, 95);
             this.textBoxDebug.Multiline = true;
             this.textBoxDebug.Name = "textBoxDebug";
             this.textBoxDebug.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
@@ -125,7 +156,7 @@
             // 
             // buttonSaveUpdate
             // 
-            this.buttonSaveUpdate.Location = new System.Drawing.Point(87, 258);
+            this.buttonSaveUpdate.Location = new System.Drawing.Point(87, 327);
             this.buttonSaveUpdate.Name = "buttonSaveUpdate";
             this.buttonSaveUpdate.Size = new System.Drawing.Size(75, 23);
             this.buttonSaveUpdate.TabIndex = 16;
@@ -135,7 +166,7 @@
             // 
             // textBoxBio
             // 
-            this.textBoxBio.Location = new System.Drawing.Point(87, 122);
+            this.textBoxBio.Location = new System.Drawing.Point(87, 191);
             this.textBoxBio.Multiline = true;
             this.textBoxBio.Name = "textBoxBio";
             this.textBoxBio.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
@@ -144,14 +175,14 @@
             // 
             // textBoxEmail
             // 
-            this.textBoxEmail.Location = new System.Drawing.Point(87, 82);
+            this.textBoxEmail.Location = new System.Drawing.Point(87, 158);
             this.textBoxEmail.Name = "textBoxEmail";
             this.textBoxEmail.Size = new System.Drawing.Size(289, 20);
             this.textBoxEmail.TabIndex = 8;
             // 
             // textBoxFullName
             // 
-            this.textBoxFullName.Location = new System.Drawing.Point(87, 42);
+            this.textBoxFullName.Location = new System.Drawing.Point(87, 127);
             this.textBoxFullName.Name = "textBoxFullName";
             this.textBoxFullName.Size = new System.Drawing.Size(289, 20);
             this.textBoxFullName.TabIndex = 7;
@@ -159,16 +190,16 @@
             // labelBio
             // 
             this.labelBio.AutoSize = true;
-            this.labelBio.Location = new System.Drawing.Point(8, 129);
+            this.labelBio.Location = new System.Drawing.Point(8, 191);
             this.labelBio.Name = "labelBio";
-            this.labelBio.Size = new System.Drawing.Size(25, 13);
+            this.labelBio.Size = new System.Drawing.Size(57, 13);
             this.labelBio.TabIndex = 5;
-            this.labelBio.Text = "Bio:";
+            this.labelBio.Text = "Biography:";
             // 
             // labelEmail
             // 
             this.labelEmail.AutoSize = true;
-            this.labelEmail.Location = new System.Drawing.Point(8, 89);
+            this.labelEmail.Location = new System.Drawing.Point(8, 165);
             this.labelEmail.Name = "labelEmail";
             this.labelEmail.Size = new System.Drawing.Size(35, 13);
             this.labelEmail.TabIndex = 4;
@@ -177,7 +208,7 @@
             // labelName
             // 
             this.labelName.AutoSize = true;
-            this.labelName.Location = new System.Drawing.Point(8, 49);
+            this.labelName.Location = new System.Drawing.Point(8, 134);
             this.labelName.Name = "labelName";
             this.labelName.Size = new System.Drawing.Size(57, 13);
             this.labelName.TabIndex = 3;
@@ -186,7 +217,7 @@
             // labelPosition
             // 
             this.labelPosition.AutoSize = true;
-            this.labelPosition.Location = new System.Drawing.Point(8, 12);
+            this.labelPosition.Location = new System.Drawing.Point(8, 11);
             this.labelPosition.Name = "labelPosition";
             this.labelPosition.Size = new System.Drawing.Size(47, 13);
             this.labelPosition.TabIndex = 2;
@@ -210,7 +241,7 @@
             // 
             // buttonUpdatePicture
             // 
-            this.buttonUpdatePicture.Location = new System.Drawing.Point(487, 7);
+            this.buttonUpdatePicture.Location = new System.Drawing.Point(193, 62);
             this.buttonUpdatePicture.Name = "buttonUpdatePicture";
             this.buttonUpdatePicture.Size = new System.Drawing.Size(102, 23);
             this.buttonUpdatePicture.TabIndex = 0;
@@ -224,7 +255,7 @@
             this.AboutTab.Controls.Add(this.textBox1);
             this.AboutTab.Location = new System.Drawing.Point(4, 22);
             this.AboutTab.Name = "AboutTab";
-            this.AboutTab.Size = new System.Drawing.Size(884, 272);
+            this.AboutTab.Size = new System.Drawing.Size(884, 356);
             this.AboutTab.TabIndex = 3;
             this.AboutTab.Text = "About";
             this.AboutTab.UseVisualStyleBackColor = true;
@@ -232,7 +263,7 @@
             // buttonBack2
             // 
             this.buttonBack2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.buttonBack2.Location = new System.Drawing.Point(8, 216);
+            this.buttonBack2.Location = new System.Drawing.Point(8, 300);
             this.buttonBack2.Name = "buttonBack2";
             this.buttonBack2.Size = new System.Drawing.Size(75, 23);
             this.buttonBack2.TabIndex = 0;
@@ -253,19 +284,11 @@
             this.textBox1.TabIndex = 1;
             this.textBox1.Text = resources.GetString("textBox1.Text");
             // 
-            // textBoxStatus
-            // 
-            this.textBoxStatus.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.textBoxStatus.Location = new System.Drawing.Point(0, 304);
-            this.textBoxStatus.Name = "textBoxStatus";
-            this.textBoxStatus.Size = new System.Drawing.Size(892, 20);
-            this.textBoxStatus.TabIndex = 1;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(892, 324);
+            this.ClientSize = new System.Drawing.Size(892, 408);
             this.Controls.Add(this.textBoxStatus);
             this.Controls.Add(this.tabControl1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -274,6 +297,7 @@
             this.tabControl1.ResumeLayout(false);
             this.UpdateTab.ResumeLayout(false);
             this.UpdateTab.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.AboutTab.ResumeLayout(false);
             this.AboutTab.PerformLayout();
             this.ResumeLayout(false);
@@ -303,6 +327,8 @@
         private System.Windows.Forms.TextBox textBoxStatus;
         private System.Windows.Forms.Button buttonPositions;
         private System.Windows.Forms.Button buttonAbout;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label labelPicture;
     }
 }
 
