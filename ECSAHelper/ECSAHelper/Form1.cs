@@ -143,7 +143,7 @@ namespace ECSAHelper
                 var exec = this.GetExecutive(this.comboBoxPosition.SelectedItem.ToString());
                 this.oldFile = exec.imageUrl;
                 this.openFileDialog1.InitialDirectory = Application.StartupPath;
-                this.openFileDialog1.FileName = this.oldFile;
+                this.openFileDialog1.FileName = Path.GetFileName(this.oldFile);
                 this.openFileDialog1.ShowDialog();
                 this.SetPicture(exec);
             }
@@ -162,8 +162,12 @@ namespace ECSAHelper
             string relativeTargetDir = Path.GetDirectoryName(this.oldFile);
             string targetDir = Path.GetFullPath(relativeTargetDir);
             string targetFile = Path.GetFileName(this.oldFile);
-            
-            if (!string.Concat(sourceDir, sourceFile).Equals(string.Concat(targetDir, targetFile)))
+
+            if (!File.Exists(targetDir))
+            {
+                this.textBoxStatus.Text = "Couldn't find img folder to save picture";
+            }
+            else if (!string.Concat(sourceDir, sourceFile).Equals(string.Concat(targetDir, targetFile)))
             {
                 File.Copy(Path.Combine(sourceDir, sourceFile), Path.Combine(targetDir, targetFile), true);
                 this.textBoxStatus.Text = "Saved file: " + sourceFile + " to: " + targetDir + "\\" + targetFile;
