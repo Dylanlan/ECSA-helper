@@ -22,6 +22,7 @@ namespace ECSAHelper
         private string newFile = "newfile";
         private string jsonFile = "executives.json";
         private string tempString = "";
+        private string serverDir = "//samba.srv.ualberta.ca/ecvhouse/public_html/Old Website/test";
 
         public Form1()
         {
@@ -32,8 +33,25 @@ namespace ECSAHelper
             {
                 this.comboBoxPosition.SelectedIndex = 0;
             }
+
             this.textBoxStatus.Text = this.tempString;
             this.Text = "ECSA Website Contact Updater";
+        }
+
+        public string JsonPath
+        {
+            get
+            {
+                return this.serverDir + "/json/" + this.jsonFile;
+            }
+        }
+
+        public string ImgDir
+        {
+            get
+            {
+                return this.serverDir + "/img";
+            }
         }
 
         [Editor(typeof(CollectionEditor), typeof(UITypeEditor))]
@@ -66,7 +84,7 @@ namespace ECSAHelper
             StreamReader r = null;
             try
             {
-                r = new StreamReader(this.jsonFile);
+                r = new StreamReader(this.JsonPath);
                 string json = r.ReadToEnd();
                 this.textBoxDebug.Text = json;
                 JsonTextReader reader = new JsonTextReader(new StringReader(json));
@@ -121,11 +139,11 @@ namespace ECSAHelper
                         this.Executives.Add(exec);
                     }
                 }
-                this.tempString = "Loaded file: " + this.jsonFile;
+                this.tempString = "Loaded file: " + this.JsonPath;
             }
             catch(Exception e)
             {
-                this.tempString = "Could not find file: " + this.jsonFile;
+                this.tempString = "Could not find file: " + this.JsonPath;
             }
             finally
             {
@@ -141,9 +159,9 @@ namespace ECSAHelper
             if (this.comboBoxPosition.Items.Count > 0)
             {
                 var exec = this.GetExecutive(this.comboBoxPosition.SelectedItem.ToString());
-                this.oldFile = exec.imageUrl;
+                this.oldFile = Path.GetFileName(exec.imageUrl);
                 this.openFileDialog1.InitialDirectory = Application.StartupPath;
-                this.openFileDialog1.FileName = Path.GetFileName(this.oldFile);
+                this.openFileDialog1.FileName = this.oldFile;
                 this.openFileDialog1.ShowDialog();
                 this.SetPicture(exec);
             }
@@ -159,18 +177,19 @@ namespace ECSAHelper
         {
             string sourceDir = Path.GetDirectoryName(this.newFile);
             string sourceFile = Path.GetFileName(this.newFile);
-            string relativeTargetDir = Path.GetDirectoryName(this.oldFile);
-            string targetDir = Path.GetFullPath(relativeTargetDir);
-            string targetFile = Path.GetFileName(this.oldFile);
+            string targetDir = this.ImgDir;
+            string targetFile = this.oldFile;
 
-            if (!File.Exists(targetDir))
+            if (!Directory.Exists(targetDir))
             {
-                this.textBoxStatus.Text = "Couldn't find img folder to save picture";
+                this.textBoxStatus.Text = "Couldn't find " + targetDir + " folder to save picture";
             }
             else if (!string.Concat(sourceDir, sourceFile).Equals(string.Concat(targetDir, targetFile)))
             {
-                File.Copy(Path.Combine(sourceDir, sourceFile), Path.Combine(targetDir, targetFile), true);
-                this.textBoxStatus.Text = "Saved file: " + sourceFile + " to: " + targetDir + "\\" + targetFile;
+                string source = sourceDir + "/" + sourceFile;
+                string target = targetDir + "/" + targetFile;
+                File.Copy(source, target, true);
+                this.textBoxStatus.Text = "Saved file: " + sourceFile + " to: " + target;
             }
             else
             {
@@ -210,10 +229,20 @@ namespace ECSAHelper
 
             string output = JsonConvert.SerializeObject(this.Executives, Newtonsoft.Json.Formatting.Indented);
             this.textBoxDebug.Text = output;
-            using (StreamWriter outfile = new StreamWriter("executives.json"))
+            StreamWriter outfile = null;
+            try
             {
+                outfile = new StreamWriter(this.JsonPath);
                 outfile.Write(output.ToString());
-                this.textBoxStatus.Text = "Saved to file: " + this.jsonFile;
+                this.textBoxStatus.Text = "Saved to file: " + this.JsonPath;
+            }
+            catch(Exception e)
+            {
+                this.textBoxStatus.Text = "Could not save to file: " + this.JsonPath;
+            }
+            finally
+            {
+                outfile.Close();
             }
         }
 
@@ -331,15 +360,21 @@ namespace ECSAHelper
 
         private void SetPicture(Executive exec)
         {
-            string imageFile = exec.imageUrl;
-            if (File.Exists(imageFile))
+            string imageFile = this.serverDir + "/" + exec.imageUrl;
+            
+            if (exec.imageUrl == "" || exec.imageUrl.Length < 1)
             {
-                this.pictureBox1.Image = Image.FromStream(new MemoryStream(File.ReadAllBytes(imageFile)));
+                this.textBoxStatus.Text = "Executive is missing image url";
+                this.pictureBox1.Image = null;
             }
-            else
+            else if (!File.Exists(imageFile))
             {
                 this.textBoxStatus.Text = "Could not find picture: " + imageFile;
                 this.pictureBox1.Image = null;
+            }
+            else
+            {
+                this.pictureBox1.Image = Image.FromStream(new MemoryStream(File.ReadAllBytes(imageFile)));
             }
             
         }
