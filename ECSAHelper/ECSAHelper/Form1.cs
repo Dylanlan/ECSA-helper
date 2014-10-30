@@ -72,11 +72,6 @@ namespace ECSAHelper
             return null;
         }
 
-        private string GetImageFileName(string position)
-        {
-            return position.Replace(" ", string.Empty);
-        }
-
         private void LoadJson()
         {
             this.Executives = new List<Executive>();
@@ -224,7 +219,7 @@ namespace ECSAHelper
 
             foreach (var exec in this.Executives)
             {
-                exec.imageUrl = "img/" + this.GetImageFileName(exec.position) + ".jpg";
+                exec.SetImageUrl();
             }
 
             string output = JsonConvert.SerializeObject(this.Executives, Newtonsoft.Json.Formatting.Indented);
@@ -395,7 +390,7 @@ namespace ECSAHelper
             if (this.tabControl1.SelectedIndex == 0 && this.comboBoxPosition.Items.Count > 0)
             {
                 var currentExec = this.GetExecutive(this.comboBoxPosition.SelectedItem.ToString());
-                currentExec.imageUrl = "img/" + this.GetImageFileName(currentExec.position) + ".jpg";
+                currentExec.SetImageUrl();
                 currentExec.fullName = this.textBoxFullName.Text;
                 currentExec.email = this.textBoxEmail.Text;
                 currentExec.bio = this.textBoxBio.Text;

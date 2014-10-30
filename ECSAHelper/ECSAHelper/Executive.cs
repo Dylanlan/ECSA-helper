@@ -38,6 +38,16 @@ namespace ECSAHelper
         [Browsable(false)]
         public string imageUrl { get; set; }
 
+        public void SetImageUrl()
+        {
+            this.imageUrl = "img/" + this.GetImageFileName() + ".jpg";
+        }
+
+        public string GetImageFileName()
+        {
+            return position.Replace(" ", string.Empty);
+        }
+
         public override string ToString()
         {
             return this.position.ToString();
