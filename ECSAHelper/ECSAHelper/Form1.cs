@@ -62,7 +62,6 @@ namespace ECSAHelper
             }
         }
 
-        [Editor(typeof(CollectionEditor), typeof(UITypeEditor))]
         public List<Executive> Executives { get; private set; }
 
         [Editor(typeof(CollectionEditor), typeof(UITypeEditor))]
@@ -157,25 +156,6 @@ namespace ECSAHelper
             }
         }
 
-        private void buttonUpdatePicture_Click(object sender, EventArgs e)
-        {
-            if (this.comboBoxPosition.Items.Count > 0)
-            {
-                var exec = this.GetExecutive(this.comboBoxPosition.SelectedItem.ToString());
-                this.oldFile = Path.GetFileName(exec.imageUrl);
-                this.openFileDialog1.InitialDirectory = Application.StartupPath;
-                this.openFileDialog1.FileName = this.oldFile;
-                this.openFileDialog1.ShowDialog();
-                this.SetPicture(exec);
-            }
-        }
-
-        private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
-        {
-            this.newFile = this.openFileDialog1.FileName;
-            this.overwritePicture();
-        }
-
         private void overwritePicture()
         {
             string sourceDir = Path.GetDirectoryName(this.newFile);
@@ -198,27 +178,6 @@ namespace ECSAHelper
             {
                 this.textBoxStatus.Text = "Tried to update picture with itself";
             }
-        }
-
-        void comboBoxPosition_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            this.textBoxStatus.Text = "";
-            if (comboBoxPosition.Items.Count > 0)
-            {
-                var currentExec = this.GetExecutive(this.comboBoxPosition.SelectedItem.ToString());
-                this.DisplayExecInfo(currentExec);
-            }
-        }
-
-        private void buttonBack_Click(object sender, EventArgs e)
-        {
-            this.textBoxStatus.Text = "";
-            this.tabControl1.SelectedIndex = 0;
-        }
-
-        private void buttonSaveUpdate_Click(object sender, EventArgs e)
-        {
-            this.Save();
         }
 
         private void Save()
@@ -250,34 +209,6 @@ namespace ECSAHelper
                     outfile.Close();
                 }
             }
-        }
-
-        private void buttonPositions_Click(object sender, EventArgs e)
-        {
-            this.UpdateCurrentExec();
-            this.textBoxStatus.Text = "";
-            int oldNum = this.comboBoxPosition.Items.Count;
-            string selectedExec = "";
-            if (oldNum > 0)
-            {
-                selectedExec = this.comboBoxPosition.SelectedItem.ToString();
-            }
-
-            Editor.Edit(this, "ExecutiveNames");
-
-            this.SyncPositions();
-            int newNum = this.comboBoxPosition.Items.Count;
-
-            if (oldNum == 0 && newNum > 0)
-            {
-                this.comboBoxPosition.SelectedIndex = 0;
-            }
-            else
-            {
-                this.SelectExec(selectedExec);
-            }
-
-            this.DisplaySelectedExecInfo();
         }
 
         private void SelectExec(string position)
@@ -385,17 +316,6 @@ namespace ECSAHelper
             
         }
 
-        private void buttonAbout_Click(object sender, EventArgs e)
-        {
-            this.textBoxStatus.Text = "";
-            this.tabControl1.SelectedIndex = 1;
-        }
-
-        private void comboBoxPosition_GotFocus(object sender, EventArgs e)
-        {
-            this.UpdateCurrentExec();
-        }
-
         private void UpdateCurrentExec()
         {
             if (this.tabControl1.SelectedIndex == 0 && this.comboBoxPosition.Items.Count > 0)
@@ -406,6 +326,85 @@ namespace ECSAHelper
                 currentExec.email = this.textBoxEmail.Text;
                 currentExec.bio = this.textBoxBio.Text;
             }
+        }
+
+        private void buttonUpdatePicture_Click(object sender, EventArgs e)
+        {
+            if (this.comboBoxPosition.Items.Count > 0)
+            {
+                var exec = this.GetExecutive(this.comboBoxPosition.SelectedItem.ToString());
+                this.oldFile = Path.GetFileName(exec.imageUrl);
+                this.openFileDialog1.InitialDirectory = Application.StartupPath;
+                this.openFileDialog1.FileName = this.oldFile;
+                this.openFileDialog1.ShowDialog();
+                this.SetPicture(exec);
+            }
+        }
+
+        private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
+        {
+            this.newFile = this.openFileDialog1.FileName;
+            this.overwritePicture();
+        }
+
+        private void comboBoxPosition_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.textBoxStatus.Text = "";
+            if (comboBoxPosition.Items.Count > 0)
+            {
+                var currentExec = this.GetExecutive(this.comboBoxPosition.SelectedItem.ToString());
+                this.DisplayExecInfo(currentExec);
+            }
+        }
+
+        private void buttonBack_Click(object sender, EventArgs e)
+        {
+            this.textBoxStatus.Text = "";
+            this.tabControl1.SelectedIndex = 0;
+        }
+
+        private void buttonSaveUpdate_Click(object sender, EventArgs e)
+        {
+            this.Save();
+        }
+
+        private void buttonPositions_Click(object sender, EventArgs e)
+        {
+            this.UpdateCurrentExec();
+            this.textBoxStatus.Text = "";
+            int oldNum = this.comboBoxPosition.Items.Count;
+            string selectedExec = "";
+            if (oldNum > 0)
+            {
+                selectedExec = this.comboBoxPosition.SelectedItem.ToString();
+            }
+
+            Editor.Edit(this, "ExecutiveNames");
+
+            this.SyncPositions();
+            int newNum = this.comboBoxPosition.Items.Count;
+
+            if (oldNum == 0 && newNum > 0)
+            {
+                this.comboBoxPosition.SelectedIndex = 0;
+            }
+            else
+            {
+                this.SelectExec(selectedExec);
+            }
+
+            this.DisplaySelectedExecInfo();
+        }
+
+        private void buttonAbout_Click(object sender, EventArgs e)
+        {
+            this.textBoxStatus.Text = "";
+            this.tabControl1.SelectedIndex = 1;
+        }
+
+        private void comboBoxPosition_GotFocus(object sender, EventArgs e)
+        {
+            this.UpdateCurrentExec();
         }
     }
 }
