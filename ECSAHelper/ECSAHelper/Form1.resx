@@ -123,16 +123,15 @@
   <data name="textBox1.Text" xml:space="preserve">
     <value>This program can be used to update the contact information for ECSA Executives on the ECSA website: www.ualberta.ca/~ecvhouse
 
-At the main screen, there is a button labelled 'Edit All...' where you can compactly edit all the Executive's information except their picture.
-If you want to edit information one at a time, or change which picture is displayed then you'll have to specify all the available Executive
-positions by clicking 'Positions...', and then clicking 'Next'. On this screen you can specify which Executive information you want to edit
-from the drop down menu, and there is a button 'Update Picture...' which will allow you to pick a new picture. Make sure to click the 'Save'
-button if you modify any of the contact information in the text boxes.
+It first tries to load the current executives.json file from the server which specifies all the contact information that is displayed on the website.
+If it can't load this file, then there is most likely some sort of issue, see if you can access the file yourself on the filesystem.
 
-This program should be located on the samba server, in a directory called 'Maintain'. It will generate an updated JSON file based on the
-new information supplied, and will overwrite the corresponding Executive picture file.
+Once it is able to load the file, you can begin changing the various information, but make sure to click 'Save' once you're done updating.
+This program will try to load the current picture for each Executive. You can change which picture will be displayed on the website by clicking
+'Update Picture', and selecting the new picture.
 
-Note that this program has not been very thoroughly tested, so there are bound to be bugs and such, so use at your own risk.
+If the Executive Positions have changed, you can click the 'Positions...' button to update them. The drop down list will then update according
+to the positions specified, and you can specify new information/picture for any new positions.
 
 If you have any questions about this program, feel free to email dylan.stank@gmail.com</value>
   </data>

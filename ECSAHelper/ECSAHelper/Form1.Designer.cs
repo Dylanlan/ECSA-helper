@@ -66,7 +66,8 @@
             // 
             // textBoxStatus
             // 
-            this.textBoxStatus.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.textBoxStatus.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxStatus.Location = new System.Drawing.Point(0, 388);
             this.textBoxStatus.Name = "textBoxStatus";
             this.textBoxStatus.Size = new System.Drawing.Size(892, 20);
@@ -74,9 +75,11 @@
             // 
             // tabControl1
             // 
+            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Controls.Add(this.UpdateTab);
             this.tabControl1.Controls.Add(this.AboutTab);
-            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Top;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -138,7 +141,8 @@
             // 
             // buttonAbout
             // 
-            this.buttonAbout.Location = new System.Drawing.Point(168, 327);
+            this.buttonAbout.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.buttonAbout.Location = new System.Drawing.Point(3, 330);
             this.buttonAbout.Name = "buttonAbout";
             this.buttonAbout.Size = new System.Drawing.Size(75, 23);
             this.buttonAbout.TabIndex = 19;
@@ -158,17 +162,21 @@
             // 
             // textBoxDebug
             // 
-            this.textBoxDebug.Location = new System.Drawing.Point(382, 95);
+            this.textBoxDebug.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxDebug.Location = new System.Drawing.Point(385, 95);
             this.textBoxDebug.Multiline = true;
             this.textBoxDebug.Name = "textBoxDebug";
             this.textBoxDebug.ReadOnly = true;
             this.textBoxDebug.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBoxDebug.Size = new System.Drawing.Size(496, 255);
+            this.textBoxDebug.Size = new System.Drawing.Size(496, 258);
             this.textBoxDebug.TabIndex = 17;
             // 
             // buttonSaveUpdate
             // 
-            this.buttonSaveUpdate.Location = new System.Drawing.Point(87, 327);
+            this.buttonSaveUpdate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.buttonSaveUpdate.Location = new System.Drawing.Point(301, 327);
             this.buttonSaveUpdate.Name = "buttonSaveUpdate";
             this.buttonSaveUpdate.Size = new System.Drawing.Size(75, 23);
             this.buttonSaveUpdate.TabIndex = 16;
@@ -178,6 +186,8 @@
             // 
             // textBoxBio
             // 
+            this.textBoxBio.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.textBoxBio.Location = new System.Drawing.Point(87, 191);
             this.textBoxBio.Multiline = true;
             this.textBoxBio.Name = "textBoxBio";
@@ -275,7 +285,7 @@
             // buttonBack2
             // 
             this.buttonBack2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.buttonBack2.Location = new System.Drawing.Point(8, 300);
+            this.buttonBack2.Location = new System.Drawing.Point(3, 330);
             this.buttonBack2.Name = "buttonBack2";
             this.buttonBack2.Size = new System.Drawing.Size(75, 23);
             this.buttonBack2.TabIndex = 0;
@@ -292,7 +302,7 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
             this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox1.Size = new System.Drawing.Size(878, 236);
+            this.textBox1.Size = new System.Drawing.Size(878, 321);
             this.textBox1.TabIndex = 1;
             this.textBox1.Text = resources.GetString("textBox1.Text");
             // 

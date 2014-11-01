@@ -22,11 +22,19 @@ namespace ECSAHelper
         private string newFile = "newfile";
         private string jsonFile = "executives.json";
         private string tempString = "";
-        private string serverDir = "//samba.srv.ualberta.ca/ecvhouse/public_html/Old Website/test";
+        private string serverDir = "//samba.srv.ualberta.ca/ecvhouse/public_html/Old Website/test2";
 
         public Form1()
         {
             InitializeComponent();
+
+            if (!Directory.Exists(this.serverDir))
+            {
+                MessageBox.Show("Could not find server directory: " + this.serverDir +
+                    "\n\nThis program will probably not work correctly unless it can find the server directory. Please make sure you have proper access to the ECSA website filesystem.",
+                    "Can't Find Server", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
             this.LoadJson();
             this.SyncPositions();
             if (this.comboBoxPosition.Items.Count > 0)
@@ -237,7 +245,10 @@ namespace ECSAHelper
             }
             finally
             {
-                outfile.Close();
+                if (outfile != null)
+                {
+                    outfile.Close();
+                }
             }
         }
 
