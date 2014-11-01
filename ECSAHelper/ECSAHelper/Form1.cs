@@ -95,7 +95,7 @@ namespace ECSAHelper
         /// This is only useful to allow the user to edit the current positions in the collection editor.
         /// </remarks>
         [Editor(typeof(CollectionEditor), typeof(UITypeEditor))]
-        public List<ExecutiveName> ExecutiveNames { get; private set; }
+        public List<ExecutivePosition> ExecutiveNames { get; private set; }
 
         /// <summary>
         /// Gets the current Executive given their position, or null if no Executive with the given position is found.
@@ -124,7 +124,7 @@ namespace ECSAHelper
         private void LoadJson()
         {
             this.Executives = new List<Executive>();
-            this.ExecutiveNames = new List<ExecutiveName>();
+            this.ExecutiveNames = new List<ExecutivePosition>();
             StreamReader r = null;
             try
             {
@@ -150,7 +150,7 @@ namespace ECSAHelper
                                     if (reader.Read() && reader.TokenType == JsonToken.String)
                                     {
                                         exec.position = reader.Value.ToString();
-                                        this.ExecutiveNames.Add(new ExecutiveName(exec.position));
+                                        this.ExecutiveNames.Add(new ExecutivePosition(exec.position));
                                     }
                                     break;
 

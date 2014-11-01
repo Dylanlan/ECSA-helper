@@ -10,7 +10,7 @@ namespace ECSAHelper
     /// A class representing the name of an ECSA Executive Position. The only reason this class exists is because I needed
     /// a non-string to be able to use the collection editor to allow the user to change which positions exist.
     /// </summary>
-    public class ExecutiveName
+    public class ExecutivePosition
     {
         /// <summary>
         /// Constructor with given name
@@ -18,7 +18,7 @@ namespace ECSAHelper
         /// <param name="name">
         /// The name of this Executive Position
         /// </param>
-        public ExecutiveName(string name)
+        public ExecutivePosition(string name)
         {
             this.Name = name;
         }
@@ -26,13 +26,13 @@ namespace ECSAHelper
         /// <summary>
         /// Default constructor sets position to New Position
         /// </summary>
-        public ExecutiveName()
+        public ExecutivePosition()
         {
             this.Name = "New Position";
         }
 
         /// <summary>
-        /// The name of this ExecutiveName
+        /// The name of this ExecutivePosition
         /// </summary>
         [Category("Executive Position")]
         public string Name { get; set; }
