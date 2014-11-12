@@ -244,10 +244,36 @@ namespace ECSAHelper
         }
 
         /// <summary>
+        /// Will disable the UI buttons, to be used while saving
+        /// </summary>
+        private void DisableButtons()
+        {
+            this.buttonSaveUpdate.Enabled = false;
+            this.buttonPositions.Enabled = false;
+            this.buttonAbout.Enabled = false;
+            this.buttonUpdatePicture.Enabled = false;
+            this.comboBoxPosition.Enabled = false;
+        }
+
+        /// <summary>
+        /// Will enable the UI buttons, to be used after save completed
+        /// </summary>
+        private void EnableButtons()
+        {
+            this.buttonSaveUpdate.Enabled = true;
+            this.buttonPositions.Enabled = true;
+            this.buttonAbout.Enabled = true;
+            this.buttonUpdatePicture.Enabled = true;
+            this.comboBoxPosition.Enabled = true;
+        }
+
+        /// <summary>
         /// Will save the current Executive info to the json file on the server
         /// </summary>
         private void Save()
         {
+            Cursor.Current = Cursors.WaitCursor;
+            this.DisableButtons();
             // Updates the info for the currently selected Executive
             this.UpdateCurrentExec();
 
@@ -276,6 +302,8 @@ namespace ECSAHelper
             }
             finally
             {
+                this.EnableButtons();
+                Cursor.Current = Cursors.Default;
                 if (outfile != null)
                 {
                     outfile.Close();
