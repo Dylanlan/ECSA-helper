@@ -53,6 +53,7 @@
 			this.AboutTab = new System.Windows.Forms.TabPage();
 			this.buttonBack2 = new System.Windows.Forms.Button();
 			this.textBox1 = new System.Windows.Forms.TextBox();
+			this.openFileDialog2 = new System.Windows.Forms.OpenFileDialog();
 			this.tabControl1.SuspendLayout();
 			this.UpdateTab.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -319,6 +320,13 @@
 			this.textBox1.TabIndex = 1;
 			this.textBox1.Text = resources.GetString("textBox1.Text");
 			// 
+			// openFileDialog2
+			// 
+			this.openFileDialog2.FileName = "openFileDialog2";
+			this.openFileDialog2.Filter = "PDF file|*.pdf";
+			this.openFileDialog2.Title = "Choose New Constitution (.pdf)";
+			this.openFileDialog2.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog2_FileOk);
+			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -366,6 +374,7 @@
         private System.Windows.Forms.Label labelPicture;
         private System.Windows.Forms.Label labelOutput;
 		private System.Windows.Forms.Button buttonConstitution;
+		private System.Windows.Forms.OpenFileDialog openFileDialog2;
     }
 }
 

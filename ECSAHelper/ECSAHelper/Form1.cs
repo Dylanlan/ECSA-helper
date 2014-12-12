@@ -28,6 +28,8 @@ namespace ECSAHelper
         private string newFile = "newfile";
         // The name of the json file which contains the Executive info
         private string jsonFile = "executives.json";
+		// The name of the file of the ECSA Constitution
+		private string constitutionFile = "constitution.pdf";
         // A temporary string to hold status messages
         private string tempString = "";
         // The directory of the ECSA website server, this program assumes there will be subdirectories 'img', and 'json'
@@ -206,6 +208,42 @@ namespace ECSAHelper
                 }
             }
         }
+
+		/// <summary>
+		/// Will overwrite the old ECSA constitution with the newly picked one.
+		/// </summary>
+		/// <remarks>
+		/// This method should only be called after the user has selected the new constitution. Currently only called
+		/// from openFileDialog2_FileOk() so that this.newFile exists
+		/// </remarks>
+		private void overwriteConstitution()
+		{
+			// Source is the new constitution (probably from local computer)
+			// Target is the old constitution (hopefully on the server)
+			string sourceDir = Path.GetDirectoryName(this.newFile);
+			string sourceFile = Path.GetFileName(this.newFile);
+			string targetDir = this.serverDir;
+			string targetFile = this.oldFile;
+
+			if (!Directory.Exists(targetDir))
+			{
+				// Couldn't find correct directory on the server
+				this.textBoxStatus.Text = "Couldn't find " + targetDir + " folder to save constitution";
+			}
+			else if (!string.Concat(sourceDir, sourceFile).Equals(string.Concat(targetDir, targetFile)))
+			{
+				string source = sourceDir + "/" + sourceFile;
+				string target = targetDir + "/" + targetFile;
+				// Overwrite the file if it exists
+				File.Copy(source, target, true);
+				this.textBoxStatus.Text = "Saved file: " + sourceFile + " to: " + target;
+			}
+			else
+			{
+				// In case the user accidentally selects the current constitution on the server, this caused an error
+				this.textBoxStatus.Text = "Tried to update constitution with itself";
+			}
+		}
 
         /// <summary>
         /// Will overwrite the old Executive picture with the newly picked one.
@@ -508,6 +546,22 @@ namespace ECSAHelper
             }
         }
 
+		/// <summary>
+		/// If the user clicks to update the constitution, display a file picker
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		/// <remarks>
+		/// When the user selects a valid constitution file, openFileDialog2_FileOk() will call to overwrite the constitution file
+		/// </remarks>
+		private void buttonConstitution_Click(object sender, EventArgs e)
+		{
+			this.oldFile = this.constitutionFile;
+			this.openFileDialog2.InitialDirectory = Application.StartupPath;
+			this.openFileDialog2.FileName = "Constitution.pdf";
+			this.openFileDialog2.ShowDialog();
+		}
+
         /// <summary>
         /// If the user selects a valid new picture file, overwrite the old picture on the server
         /// </summary>
@@ -521,6 +575,20 @@ namespace ECSAHelper
             // Overwrite the old picture on the server with the new picture
             this.overwritePicture();
         }
+
+		/// <summary>
+		/// If the user selects a valid new constitution file, overwrite the old constitution on the server
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void openFileDialog2_FileOk(object sender, CancelEventArgs e)
+		{
+			// The full path of constitution selected by the user
+			this.newFile = this.openFileDialog2.FileName;
+
+			// Overwrite the old constitution on the server with the new constitution
+			this.overwriteConstitution();
+		}
 
         /// <summary>
         /// Called when the combo box selected index changes, either by the user or by code. Will display the
@@ -634,10 +702,5 @@ namespace ECSAHelper
         {
             this.UpdateCurrentExec();
         }
-
-		private void buttonConstitution_Click(object sender, EventArgs e)
-		{
-
-		}
     }
 }
