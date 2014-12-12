@@ -634,5 +634,10 @@ namespace ECSAHelper
         {
             this.UpdateCurrentExec();
         }
+
+		private void buttonConstitution_Click(object sender, EventArgs e)
+		{
+
+		}
     }
 }
