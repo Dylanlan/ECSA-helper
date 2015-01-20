@@ -33,7 +33,7 @@ namespace ECSAHelper
         // A temporary string to hold status messages
         private string tempString = "";
         // The directory of the ECSA website server, this program assumes there will be subdirectories 'img', and 'json'
-        private string serverDir = "//samba.srv.ualberta.ca/ecvhouse/public_html/Old Website/test";
+        private string serverDir = "//samba.srv.ualberta.ca/ecvhouse/public_html";
 
         /// <summary>
         /// Constructor for this form
