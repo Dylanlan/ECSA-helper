@@ -18,6 +18,7 @@ namespace ECSAHelper
         public Executive()
         {
             this.position = "New Position";
+            this.SetImageUrl();
         }
 
         /// <summary>
@@ -29,6 +30,7 @@ namespace ECSAHelper
         public Executive(string position)
         {
             this.position = position;
+            this.SetImageUrl();
         }
 
         /// <summary>

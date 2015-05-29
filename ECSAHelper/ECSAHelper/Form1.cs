@@ -484,7 +484,7 @@ namespace ECSAHelper
             // The expected full path of the picture file
             string imageFile = this.serverDir + "/" + exec.imageUrl;
             
-            if (exec.imageUrl == "" || exec.imageUrl.Length < 1)
+            if (exec.imageUrl == "" || exec.imageUrl == null || exec.imageUrl.Length < 1)
             {
                 // If the Executive is missing image file information
                 this.textBoxStatus.Text = "Executive is missing image url";
